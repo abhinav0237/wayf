@@ -223,6 +223,167 @@ body {
   font-size: 13px;
   color: #666;
 }
+
+.map-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column; /* Stack things vertically if needed */
+  justify-content: center;
+  align-items: center;
+  background: #e9eaec;
+  padding: 20px;
+}
+
+.map-wrapper {
+  position: relative;
+  display: inline-block; /* Crucial: Shrinks container to fit the image size */
+  line-height: 0;        /* Removes tiny gap at the bottom of images */
+  max-width: 100%;       /* Prevents horizontal overflow on mobile */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  overflow: hidden;      /* Clips the path if it goes out of bounds */
+  background: white;     /* Matches your screenshot's card vibe */
+}
+
+.map-image {
+  width: 100%;           /* Scale image to wrapper width */
+  height: auto;
+  max-height: 70vh;      /* Keep it within view */
+  display: block;
+}
+
+.path-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;  /* Allows clicking "through" the SVG to set your position */
+  z-index: 5;
+}
+
+.marker {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.marker.user {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #1e90ff;
+  border: 2px solid white;
+  border-radius: 50%;
+  z-index: 10;
+  transition: transform 0.2s ease-out; /* Smooths out the rotation */
+}
+
+/* The "beaming" arrow showing orientation */
+.direction-arrow {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 12px solid #1e90ff;
+}
+
+.compass-btn {
+  position: absolute;
+  top: 20px;
+  z-index: 100;
+  padding: 10px 20px;
+  background: #2f3b4a;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0px rgba(30, 144, 255, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(30, 144, 255, 0); }
+  100% { box-shadow: 0 0 0 0px rgba(30, 144, 255, 0); }
+}
+
+.marker.destination {
+  background: #ef4444;
+}
+
+.map-image {
+  z-index: 1;
+}
+.path-overlay {
+  z-index: 10;
+}
+
+/* Scanner Overlay */
+.qr-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85); /* Darken background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px); /* Blur the map behind it */
+}
+
+.qr-modal-content {
+  background: white;
+  width: 90%;
+  max-width: 400px;
+  padding: 24px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.qr-modal-content h3 {
+  margin-top: 0;
+  color: #333;
+  font-family: sans-serif;
+}
+
+/* Make the actual camera feed look clean */
+#reader {
+  border: none !important;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#reader__dashboard_section_csr button {
+  background-color: #1e90ff !important;
+  color: white !important;
+  border: none !important;
+  padding: 8px 16px !important;
+  border-radius: 8px !important;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  margin-top: 20px;
+  background: #ff4757;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: bold;
+  width: 100%;
+}
+
 /* ---------- TOP BAR ---------- */
 
 .top-bar {
